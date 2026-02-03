@@ -1,46 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:medcheck/features/pages/consumer_home.dart';
-import 'package:medcheck/features/pages/investigatorhomepage.dart';
-import 'package:medcheck/features/pages/retailer_home.dart';
-import 'package:medcheck/features/auth/presentation/pages/registration.dart';
-import 'package:medcheck/features/pages/wholesaler_home.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medcheck/features/auth/presentation/screens/invalid_role.dart';
+
+
+import 'features/auth/presentation/bloc/auth_bloc.dart';
+import 'features/auth/presentation/screens/sign_up.dart';
+import 'injection_container.dart' as di;
 
 import 'config/theme/app_theme.dart';
-import 'features/auth/presentation/pages/login.dart';
-import 'features/pages/splashscreen.dart';
-
-
-
+import 'features/auth/presentation/screens/sign_in.dart';
+import 'features/home/presentation/screens/home_screen.dart';
 
 class MedCheckApp extends StatelessWidget {
   const MedCheckApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthBloc>(
+          create: (_) => di.sl<AuthBloc>(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'MedCheck',
+        debugShowCheckedModeBanner: false,
 
-    return MaterialApp(
-
-      title: 'MedCheck',
-
-      debugShowCheckedModeBanner: false,
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: ThemeMode.system,
 
 
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system,
-
-
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const SplashScreen(),
-        '/login': (context) => const LoginPage(),
-        '/registration' : (context) =>  const RegistrationPage(),
-        '/consumer/home': (context) => const ConsumerHomePage(),
-        '/retailer/home': (context) => const RetailerHomePage(),
-        '/wholesaler/home': (context) => const WholesalerHomePage(),
-        '/investigator/home' : (context) => const InvestigatorHomepage()
-        // '/scan': (context) => const ScanPage(),
-      },
+        initialRoute: '/signin',
+        routes: {
+          '/signin': (context) => const SignInPage(),
+          '/signup': (context) => const SignUpPage(),
+          '/home': (context) => const HomeScreen(),
+          '/invalidrole': (context) => const InvalidRole(),
+        },
+      ),
     );
   }
 }

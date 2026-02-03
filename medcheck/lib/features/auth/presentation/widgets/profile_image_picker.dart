@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfileImagePicker extends StatefulWidget {
-  // Callback function to send the file back to the parent (Registration Page)
+
   final void Function(File pickedImage) onImagePicked;
 
   const ProfileImagePicker({super.key, required this.onImagePicked});
