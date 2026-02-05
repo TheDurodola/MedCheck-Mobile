@@ -37,6 +37,10 @@ class _SignUpPageState extends State<SignUpPage> {
   void dispose() {
     _usernameController.dispose();
     _passwordController.dispose();
+    _dateOfBirthController.dispose();
+    _emailController.dispose();
+    _confirmPasswordController.dispose();
+    _phoneNumberController.dispose();
     super.dispose();
   }
 
@@ -46,20 +50,15 @@ class _SignUpPageState extends State<SignUpPage> {
       backgroundColor: Colors.white,
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
-          if (state is AuthAuthenticated) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text("Welcome back, ${state.user.role}!")),
-            );
-            Navigator.pushReplacementNamed(context, '/home');
-          } else if (state is AuthInvalidRoleFailure) {
-            Navigator.pushReplacementNamed(context, '/invalidrole');
-          } else if (state is AuthFailure) {
+          if (state is AuthFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(state.message),
                 backgroundColor: Colors.red,
               ),
             );
+          } else if (state is AuthRegistered) {
+            Navigator.pushReplacementNamed(context, '/welcome');
           }
         },
         builder: (context, state) {
@@ -229,7 +228,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                       nationalIdentityNumber:
                                           _nationalIdentityNumberController
                                               .text,
-                                      gender: "",
+                                      gender: _currentGender?.toUpperCase(),
                                       dateOfBirth: _dateOfBirthController.text,
                                     ),
                                   );

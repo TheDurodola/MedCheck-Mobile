@@ -26,8 +26,7 @@ class RegistrationRequested extends AuthEvent {
   final String email;
   final String phoneNumber;
   final String nationalIdentityNumber;
-  final String gender;
-  final String role = "Customer";
+  final String? gender;
 
   final String dateOfBirth;
 
@@ -54,7 +53,7 @@ class RegistrationRequested extends AuthEvent {
     email,
     phoneNumber,
     nationalIdentityNumber,
-    gender,
+    ?gender,
     dateOfBirth
   ];
 }

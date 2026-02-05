@@ -28,7 +28,7 @@ class _UsernameFieldState extends State<UsernameField>{
         labelText: "Username",
         prefixIcon: Icon(
           Icons.person_outline,
-          color: AppColors.accentGreen,
+          color: Colors.black,
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),

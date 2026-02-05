@@ -9,6 +9,7 @@ class AuthLocalDataSourceImpl extends AuthLocalDataSource{
   AuthLocalDataSourceImpl({required this.secureStorage});
 
   static const String _tokenKey = 'CACHED_AUTH_TOKEN';
+  static const String _userFirstName = "USER_FIRST_NAME";
 
   @override
   Future<void> cacheToken(String token) async {
@@ -32,6 +33,33 @@ class AuthLocalDataSourceImpl extends AuthLocalDataSource{
   Future<void> clearCache() async {
     try {
       await secureStorage.delete(key: _tokenKey);
+    } catch (e) {
+      throw CacheException();
+    }
+  }
+
+  @override
+  Future<void> cacheFirstname(String firstname) async {
+    try {
+      await secureStorage.write(key: _userFirstName, value: firstname);
+    } catch (e) {
+      throw CacheException();
+    }
+  }
+
+  @override
+  Future<void> clearFirstname() async {
+    try {
+      await secureStorage.delete(key: _userFirstName);
+    } catch (e) {
+      throw CacheException();
+    }
+  }
+
+  @override
+  Future<String?> getFirstname() async {
+    try {
+      return await secureStorage.read(key: _userFirstName);
     } catch (e) {
       throw CacheException();
     }

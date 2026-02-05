@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medcheck/features/auth/domain/usecases/sign_up_customer.dart'
     hide LoginParams;
 import '../../../../core/errors/failures.dart';
+import '../../domain/usecases/login_params.dart';
 import '../../domain/usecases/login_user.dart';
 import '../../domain/usecases/sign_up_params.dart';
 import 'auth_event.dart';
@@ -67,8 +68,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       phoneNumber: event.phoneNumber,
       nationalIdentityNumber: event.nationalIdentityNumber,
       gender: event.gender,
+      dateOfBirth: event.dateOfBirth,
     );
 
     final result = await signUpCustomer(params);
+
+    result.fold((failure) {
+      if (failure is ServerFailure) {
+        emit(AuthFailure(message: failure.message));
+      } else {
+        emit(AuthFailure(message: failure.message));
+      }
+    }, (user) => emit(AuthRegistered(message: "Registration Successful")));
   }
 }

@@ -28,7 +28,7 @@ class _PasswordInputFieldState extends State<PasswordInputField> {
       decoration: InputDecoration(
         labelText: widget.label,
         border: const OutlineInputBorder(),
-        prefixIcon: const Icon(Icons.lock),
+        prefixIcon: const Icon(Icons.lock, color: Colors.black),
         suffixIcon: IconButton(
           icon: Icon(
             _obscureText ? Icons.visibility_off : Icons.visibility,

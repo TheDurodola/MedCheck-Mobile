@@ -34,6 +34,15 @@ class AuthFailure extends AuthState {
 }
 
 
+class AuthRegistered extends AuthState {
+  final String message;
+
+  const AuthRegistered({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
+
 class AuthInvalidRoleFailure extends AuthState {
   final String message;
 

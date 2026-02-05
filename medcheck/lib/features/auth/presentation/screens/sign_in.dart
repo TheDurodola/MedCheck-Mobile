@@ -43,7 +43,7 @@ class _SignInPageState extends State<SignInPage> {
           else if (state is AuthInvalidRoleFailure) {
             Navigator.pushReplacementNamed(context, '/invalidrole');
           }
-          else if (state is AuthFailure) {
+          else if (state is AuthRegistered) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(state.message),

@@ -9,8 +9,9 @@ class SignUpParams extends Equatable {
   final String email;
   final String phoneNumber;
   final String nationalIdentityNumber;
-  final String gender;
+  final String? gender;
   final String role = "Customer";
+  final String dateOfBirth;
 
   const SignUpParams({
     required this.username,
@@ -21,11 +22,21 @@ class SignUpParams extends Equatable {
     required this.email,
     required this.phoneNumber,
     required this.nationalIdentityNumber,
-    required this.gender,
-
+    this.gender,
+    required this.dateOfBirth,
   });
 
   @override
-  // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [
+    username,
+    password,
+    firstName,
+    lastName,
+    middleName,
+    email,
+    phoneNumber,
+    nationalIdentityNumber,
+    gender,
+    role,
+  ];
 }
