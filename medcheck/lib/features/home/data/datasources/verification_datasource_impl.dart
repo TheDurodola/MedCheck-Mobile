@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:medcheck/features/auth/data/datasources/abstract_classes/auth_local_datasource.dart';
 import 'package:medcheck/features/home/data/datasources/abstract_classes/verification_datasource.dart';
 
 import '../../../../core/constants/api_constants.dart';
@@ -12,16 +14,22 @@ import '../models/verify_sachet_request.dart';
 
 class VerificationDatasourceImpl extends VerificationDatasource{
   final http.Client client;
+  final AuthLocalDataSource localDataSource;
 
-  VerificationDatasourceImpl(this.client);
+  VerificationDatasourceImpl(this.client, this.localDataSource);
 
   @override
   Future<PackModel> verifyPack(VerifyPackRequest request) async {
-    final url = Uri.parse("${ApiConstants.verifyPack}/${request.verificationCode}");
+    final url = Uri.parse(ApiConstants.verifyPack);
+
+    final rawToken = await localDataSource.getLastToken();
+    String token = rawToken.toString();
+
 
     final response = await client.put(
       url,
-      headers: ApiConstants.headers,
+      headers: ApiConstants.authHeaders(token ?? ''),
+      body: jsonEncode(request.toJson()),
     );
 
     if (response.statusCode == 200) {

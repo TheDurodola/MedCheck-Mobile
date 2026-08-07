@@ -21,7 +21,7 @@ class VerificationRepositoryImpl extends VerificationRepository {
 
     if (await networkInfo.isConnected) {
       try {
-        final requestModel = VerifyPackRequest(verificationCode: params.verificationCode
+        final requestModel = VerifyPackRequest(verificationCode: params.packVerificationCode
         );
 
         final remoteUser = await remoteDataSource.verifyPack(requestModel);

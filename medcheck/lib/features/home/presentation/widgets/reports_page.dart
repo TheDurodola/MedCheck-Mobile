@@ -22,7 +22,7 @@ class _ReportPageState  extends State<ReportsPage>{
            ),
            const SizedBox(height: 8),
            Text(
-             "Your verification history will appear here",
+             "Coming soon",
              style: TextStyle(fontSize: 14, color: Colors.grey[500]),
            ),
          ],

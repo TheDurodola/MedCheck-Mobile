@@ -1,16 +1,18 @@
-# medcheck
+# MedCheck Flutter Application
 
-A new Flutter project.
+This directory contains the main Flutter codebase for **Medify Mobile** (MedCheck).
 
-## Getting Started
+Please refer to the primary [Project README](../README.md) at the root of the repository for full setup instructions, architecture breakdown, and API configurations.
 
-This project is a starting point for a Flutter application.
+## Quick Commands
 
-A few resources to get you started if this is your first Flutter project:
+```bash
+# Get dependencies
+flutter pub get
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+# Run app in debug mode
+flutter run
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Run tests
+flutter test
+```

@@ -5,7 +5,7 @@ class VerifySachetRequest {
 
   Map<String, dynamic> toJson() {
     return {
-      "email": verificationCode,
+      "sachetVerificationCode": verificationCode,
 
     };
   }

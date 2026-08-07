@@ -11,7 +11,7 @@ class PackModel extends PackEntity {
     required super.noOfSachets,
     required super.packId,
     required super.genericName,
-    required super.history,
+    required super.history, required super.verificationCount,
   });
 
   factory PackModel.fromJson(Map<String, dynamic> json) {
@@ -38,11 +38,11 @@ class PackModel extends PackEntity {
 
 
       history: (json['history'] as List?)?.map((e) => e.toString()).toList() ?? [],
+      verificationCount: pack['verificationCount'] ?? '0',
     );
   }
 
 
-  @override
   Map<String, dynamic> toJson() {
     return {
       'batch': {
@@ -58,6 +58,7 @@ class PackModel extends PackEntity {
       'pack': {
         'packId': packId,
         'verificationCode': verificationCode,
+        'verificationCount': verificationCount
       },
       'sachet': {
         'noOfSachets': noOfSachets.toString(),

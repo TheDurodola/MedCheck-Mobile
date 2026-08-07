@@ -38,14 +38,14 @@ class AuthRepositoryImpl implements AuthRepository {
 
         final remoteUser = await remoteDataSource.loginUser(requestModel);
 
-        if (kDebugMode) {
-          print(remoteUser.token);
-        }
+
         if (remoteUser.role.toUpperCase() != "CONSUMER") {
           return Left(InvalidRoleFailure(message: ""));
         }
 
+
         await localDataSource.cacheToken(remoteUser.token);
+
 
         return Right(remoteUser);
       } on ServerException catch (e) {
@@ -57,42 +57,6 @@ class AuthRepositoryImpl implements AuthRepository {
       return const Left(NetworkFailure(message: "No Internet Connection"));
     }
   }
-
-  // @override
-  // Future<Either<Failure, RegistrationModel>> signUpCustomer(
-  //   SignUpParams params,
-  // ) async {
-  //   if (await networkInfo.isConnected) {
-  //     try {
-  //       final requestModel = SignUpRequestModel(
-  //         username: params.username,
-  //         password: params.password,
-  //         firstname: params.firstName,
-  //         email: params.email,
-  //         lastname: params.lastName,
-  //         middlename: params.middleName,
-  //         phoneNumber: params.phoneNumber,
-  //         nationalIdentityNumber: params.nationalIdentityNumber,
-  //         dateOfBirth: params.dateOfBirth,
-  //         gender: params.gender,
-  //       );
-  //
-  //       final remoteUser = await remoteDataSource.signUpCustomer(requestModel);
-  //
-  //       AppLogger.debug('=== Registration Started ===');
-  //       AppLogger.debug(remoteUser.firstName);
-  //       AppLogger.debug(remoteUser.username);
-  //       await localDataSource.cacheFirstname(remoteUser.firstName);
-  //       return Right(remoteUser);
-  //     } on ServerException catch (e) {
-  //       return Left(ServerFailure(message: e.message));
-  //     } catch (e) {
-  //       return Left(ServerFailure(message: e.toString()));
-  //     }
-  //   } else {
-  //     return const Left(NetworkFailure(message: "No Internet Connection"));
-  //   }
-  // }
 
   @override
   Future<Either<Failure, RegistrationModel>> signUpCustomer(

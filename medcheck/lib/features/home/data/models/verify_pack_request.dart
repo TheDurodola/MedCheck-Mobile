@@ -5,7 +5,7 @@ class VerifyPackRequest {
 
   Map<String, dynamic> toJson() {
     return {
-      "verificationCode": verificationCode,
+      "packVerificationCode": verificationCode,
     };
   }
 }

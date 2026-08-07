@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:medcheck/features/home/domain/entities/pack_entity.dart';
 
 
 abstract class VerificationState extends Equatable {
@@ -8,23 +9,24 @@ abstract class VerificationState extends Equatable {
   List<Object> get props => [];
 }
 
-class AuthInitial extends VerificationState {}
+class VerificationInitial extends VerificationState {}
 
-class AuthLoading extends VerificationState {}
+class VerificationLoading extends VerificationState {}
 
-class AuthAuthenticated extends VerificationState {
+class PackApproved extends VerificationState {
+  final PackEntity packEntity;
 
 
-  const AuthAuthenticated();
+  const PackApproved({required this.packEntity});
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [packEntity];
 }
 
-class AuthFailure extends VerificationState {
+class VerificationFailure extends VerificationState {
   final String message;
 
-  const AuthFailure({required this.message});
+  const VerificationFailure({required this.message});
 
   @override
   List<Object> get props => [message];

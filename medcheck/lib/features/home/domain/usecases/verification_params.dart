@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 
 class VerificationParams extends Equatable {
-  final String verificationCode;
+  final String packVerificationCode;
 
-  const VerificationParams(this.verificationCode);
+  const VerificationParams(this.packVerificationCode);
 
   @override
-  // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+
+  List<Object?> get props => [packVerificationCode];
 }

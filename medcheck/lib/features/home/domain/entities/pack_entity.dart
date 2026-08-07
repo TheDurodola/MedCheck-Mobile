@@ -7,6 +7,7 @@ class PackEntity extends Equatable {
   final String description;
   final String manufacturer;
   final String verificationCode;
+  final String verificationCount;
   final int noOfSachets;
   final String packId;
   final String genericName;
@@ -23,6 +24,7 @@ class PackEntity extends Equatable {
     required this.packId,
     required this.genericName,
     required this.history,
+    required this.verificationCount,
   });
 
   @override
@@ -37,5 +39,6 @@ class PackEntity extends Equatable {
     noOfSachets,
     genericName,
     packId,
+    verificationCount
   ];
 }

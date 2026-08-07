@@ -35,15 +35,12 @@ class _SignInPageState extends State<SignInPage> {
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthAuthenticated) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text("Welcome back, ${state.user.role}!")),
-            );
             Navigator.pushReplacementNamed(context, '/home');
           }
           else if (state is AuthInvalidRoleFailure) {
             Navigator.pushReplacementNamed(context, '/invalidrole');
           }
-          else if (state is AuthRegistered) {
+          else if (state is AuthFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(state.message),
